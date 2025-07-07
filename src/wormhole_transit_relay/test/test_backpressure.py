@@ -45,7 +45,7 @@ class _CollectOutputProtocol(ProcessProtocol):
                 self.running.callback(None)
 
     def errReceived(self, data):
-        print("ERR: {}".format(data.decode(sys.getfilesystemencoding())))
+        print(f"ERR: {data.decode(sys.getfilesystemencoding())}")
         self.output.write(data.decode(sys.getfilesystemencoding()))
 
 
@@ -79,7 +79,7 @@ class Sender(WebSocketClientProtocol):
         if not self.got_ok.called:
             if payload == b"ok\n":
                 self.got_ok.callback(None)
-        print("send: {}".format(payload.decode("utf8")))
+        print(f"send: {payload.decode('utf8')}")
 
     def onClose(self, clean, code, reason):
         print(f"close: {clean} {code} {reason}")
@@ -97,7 +97,7 @@ class Receiver(WebSocketClientProtocol):
         self.received = 0
 
     def onMessage(self, payload, is_binary):
-        print("recv: {}".format(len(payload)))
+        print(f"recv: {len(payload)}")
         self.received += len(payload)
         if not self.first_message.called:
             self.first_message.callback(None)
@@ -168,7 +168,7 @@ class TransitWebSockets(unittest.TestCase):
                 data = b"a" * 1024*1024
                 self._ws.sendMessage(data, True)
                 self._sent += len(data)
-                print("sent {}, total {}".format(len(data), self._sent))
+                print(f"sent {len(data)}, total {self._sent}")
 
         # our only signal is, "did our producer get asked to produce
         # more data" which it should do periodically. We want to stop
@@ -199,7 +199,7 @@ class TransitWebSockets(unittest.TestCase):
         yield done
 
         mib = 1024*1024.0
-        print("Sent {}MiB of {}MiB before backpressure".format(data._sent / mib, max_data / mib))
+        print(f"Sent {data._sent / mib}MiB of {max_data / mib}MiB before backpressure")
         self.assertTrue(data._sent < max_data, "Too much data sent")
 
         side_a.sendClose()
