@@ -67,8 +67,8 @@ def makeService(config, reactor=reactor):
             # we're using a "private" attribute here but I don't see
             # any useful alternative unless we also want to parse
             # Twisted endpoint-strings.
-            ws_url = "ws://localhost:{}/".format(ws_ep._port)
-            print("Using WebSocket URL '{}'".format(ws_url))
+            ws_url = f"ws://localhost:{ws_ep._port}/"
+            print(f"Using WebSocket URL '{ws_url}'")
         ws_factory = WebSocketServerFactory(ws_url)
         ws_factory.protocol = transit_server.WebSocketTransitConnection
         ws_factory.transit = transit

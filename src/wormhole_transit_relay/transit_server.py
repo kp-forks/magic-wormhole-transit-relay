@@ -55,7 +55,7 @@ class TransitConnection(LineReceiver):
         """
         assert self._buddy is not None, "internal error: no buddy"
         if self.factory.log_requests:
-            log.msg("buddy_disconnected {}".format(self._buddy.get_token()))
+            log.msg(f"buddy_disconnected {self._buddy.get_token()}")
         self._buddy._client.disconnect()
         self._buddy = None
 
@@ -207,7 +207,7 @@ class WebSocketTransitConnection(WebSocketServerProtocol):
         """
         assert self._buddy is not None, "internal error: no buddy"
         if self.factory.log_requests:
-            log.msg("buddy_disconnected {}".format(self._buddy.get_token()))
+            log.msg(f"buddy_disconnected {self._buddy.get_token()}")
         self._buddy._client.disconnect()
         self._buddy = None
 
