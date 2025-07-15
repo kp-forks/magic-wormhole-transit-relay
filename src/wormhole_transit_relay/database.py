@@ -51,7 +51,7 @@ def _open_db_connection(dbfile):
     try:
         db = sqlite3.connect(dbfile)
         _initialize_db_connection(db)
-    except (EnvironmentError, sqlite3.OperationalError, sqlite3.DatabaseError) as e:
+    except (OSError, sqlite3.OperationalError, sqlite3.DatabaseError) as e:
         # this indicates that the file is not a compatible database format.
         # Perhaps it was created with an old version, or it might be junk.
         raise DBError(f"Unable to create/open db file {dbfile}: {e}")

@@ -42,21 +42,21 @@ class _Transit:
         ])
 
     def test_blur_size(self):
-        self.failUnlessEqual(blur_size(0), 0)
-        self.failUnlessEqual(blur_size(1), 10e3)
-        self.failUnlessEqual(blur_size(10e3), 10e3)
-        self.failUnlessEqual(blur_size(10e3+1), 20e3)
-        self.failUnlessEqual(blur_size(15e3), 20e3)
-        self.failUnlessEqual(blur_size(20e3), 20e3)
-        self.failUnlessEqual(blur_size(1e6), 1e6)
-        self.failUnlessEqual(blur_size(1e6+1), 2e6)
-        self.failUnlessEqual(blur_size(1.5e6), 2e6)
-        self.failUnlessEqual(blur_size(2e6), 2e6)
-        self.failUnlessEqual(blur_size(900e6), 900e6)
-        self.failUnlessEqual(blur_size(1000e6), 1000e6)
-        self.failUnlessEqual(blur_size(1050e6), 1100e6)
-        self.failUnlessEqual(blur_size(1100e6), 1100e6)
-        self.failUnlessEqual(blur_size(1150e6), 1200e6)
+        self.assertEqual(blur_size(0), 0)
+        self.assertEqual(blur_size(1), 10e3)
+        self.assertEqual(blur_size(10e3), 10e3)
+        self.assertEqual(blur_size(10e3+1), 20e3)
+        self.assertEqual(blur_size(15e3), 20e3)
+        self.assertEqual(blur_size(20e3), 20e3)
+        self.assertEqual(blur_size(1e6), 1e6)
+        self.assertEqual(blur_size(1e6+1), 2e6)
+        self.assertEqual(blur_size(1.5e6), 2e6)
+        self.assertEqual(blur_size(2e6), 2e6)
+        self.assertEqual(blur_size(900e6), 900e6)
+        self.assertEqual(blur_size(1000e6), 1000e6)
+        self.assertEqual(blur_size(1050e6), 1100e6)
+        self.assertEqual(blur_size(1100e6), 1100e6)
+        self.assertEqual(blur_size(1150e6), 1200e6)
 
     def test_register(self):
         p1 = self.new_protocol()
@@ -387,11 +387,11 @@ def _new_protocol_ws(transit_server, log_requests):
 
         def connectionMade(self):
             self.connected = True
-            return super(TransitWebSocketClientProtocol, self).connectionMade()
+            return super().connectionMade()
 
         def connectionLost(self, reason):
             self.connected = False
-            return super(TransitWebSocketClientProtocol, self).connectionLost(reason)
+            return super().connectionLost(reason)
 
         def onMessage(self, data, isBinary):
             self._received = self._received + data
@@ -503,7 +503,7 @@ class Usage(ServerBase, unittest.TestCase):
     log_requests = True
 
     def setUp(self):
-        super(Usage, self).setUp()
+        super().setUp()
         self._usage = MemoryUsageRecorder()
         self._transit_server.usage.add_backend(self._usage)
 
@@ -637,7 +637,7 @@ class UsageWebSockets(Usage):
     """
 
     def setUp(self):
-        super(UsageWebSockets, self).setUp()
+        super().setUp()
         self._pump = create_pumper()
         self._reactor = MemoryReactorClock()
         return self._pump.start()

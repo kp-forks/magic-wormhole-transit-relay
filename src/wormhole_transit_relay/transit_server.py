@@ -115,7 +115,7 @@ class TransitConnection(LineReceiver):
         self._state.connection_lost()
 
 
-class Transit(object):
+class Transit:
     """
     I manage pairs of simultaneous connections to a secondary TCP port,
     both forwarded to the other. Clients must begin each connection with
@@ -215,7 +215,7 @@ class WebSocketTransitConnection(WebSocketServerProtocol):
         """
         IProtocol API
         """
-        super(WebSocketTransitConnection, self).connectionMade()
+        super().connectionMade()
         self.started_time = time.time()
         self._first_message = True
         self._state = TransitServerState(

@@ -35,7 +35,7 @@ class RelayEchoClient(WebSocketClientProtocol):
         )
 
     def onMessage(self, data, isBinary):
-        print(">onMessage: {} bytes".format(len(data)))
+        print(f">onMessage: {len(data)} bytes")
         print(data, isBinary)
         if data == b"ok\n":
             self.factory.ready.callback(None)
@@ -78,5 +78,5 @@ def main(reactor):
         yield proto.sendClose()
         print("closing")
     yield f.done
-    print("relayed {} bytes:".format(len(proto._received)))
+    print(f"relayed {len(proto._received)} bytes:")
     print(proto._received.decode("utf8"))
