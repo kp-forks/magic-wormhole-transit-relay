@@ -124,7 +124,7 @@ class DatabaseUsageRecorder:
         self._db.commit()
 
 
-class UsageTracker(object):
+class UsageTracker:
     """
     Tracks usage statistics of connections
     """

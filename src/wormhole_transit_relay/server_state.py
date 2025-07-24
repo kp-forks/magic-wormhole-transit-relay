@@ -38,7 +38,7 @@ class ITransitClient(Interface):
         """
 
 
-class ActiveConnections(object):
+class ActiveConnections:
     """
     Tracks active connections.
 
@@ -68,7 +68,7 @@ class ActiveConnections(object):
         self._connections.discard(side)
 
 
-class PendingRequests(object):
+class PendingRequests:
     """
     Tracks outstanding (non-"active") requests.
 
@@ -145,7 +145,7 @@ class PendingRequests(object):
         # TODO: timer
 
 
-class TransitServerState(object):
+class TransitServerState:
     """
     Encapsulates the state-machine of the server side of a transit
     relay connection.

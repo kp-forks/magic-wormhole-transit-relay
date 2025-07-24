@@ -27,10 +27,10 @@ class RelayEchoClient(Protocol):
     def connectionMade(self):
         print(">CONNECT")
         self.data = b""
-        self.transport.write("please relay {}\n".format(self.factory.token).encode("ascii"))
+        self.transport.write(f"please relay {self.factory.token}\n".encode("ascii"))
 
     def dataReceived(self, data):
-        print(">RECV {} bytes".format(len(data)))
+        print(f">RECV {len(data)} bytes")
         print(data.decode("ascii"))
         self.data += data
         if data == "ok\n":
@@ -40,7 +40,7 @@ class RelayEchoClient(Protocol):
         if isinstance(reason.value, ConnectionDone):
             self.factory.done.callback(None)
         else:
-            print(">DISCONNCT: {}".format(reason))
+            print(f">DISCONNCT: {reason}")
             self.factory.done.callback(reason)
 
 
